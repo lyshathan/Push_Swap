@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:23:50 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/02 16:25:16 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/03 09:08:41 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,34 @@ void	ft_push_swap(char **arv)
 	stack_a = NULL;
 	stack_b = NULL;
 	set_list(arv, &stack_a);
-	ft_lstprint(stack_a);
+	ft_lstprint_stack(stack_a, stack_b);
+
+	ft_printf("push =======\n");
+	ft_push_a(&stack_b, &stack_a);
+	ft_push_b(&stack_a, &stack_b);
+	ft_push_b(&stack_a, &stack_b);
+	ft_lstprint_stack(stack_a, stack_b);
 
 	ft_printf("swap =======\n");
 	ft_swap_a(stack_a);
 	ft_swap_b(stack_b);
 	ft_swap_all(stack_a, stack_b);
-	ft_lstprint(stack_a);
+	ft_lstprint_stack(stack_a, stack_b);
 
-	ft_printf("push =======\n");
-	int *temp;
-	*temp = 42;
-	ft_lstadd_front(&stack_b, ft_lstnew(temp)); 
-	write(1,"ok\n", 3);
-	ft_lstprint(stack_a);
-	ft_lstprint(stack_b);
-	ft_push_a(&stack_a, &stack_b);
+	ft_printf("rotate =======\n");
+	ft_rotate_a(&stack_a);
+	ft_rotate_b(&stack_b);
+	ft_lstprint_stack(stack_a, stack_b);
+	ft_rotate_all(&stack_a, &stack_b);
+	ft_lstprint_stack(stack_a, stack_b);
+
+	ft_printf("reverse rotate =======\n");
+	ft_reverse_rotate_a(&stack_a);
+	ft_reverse_rotate_b(&stack_a);
+	ft_lstprint_stack(stack_a, stack_b);
+	ft_reverse_rotate_all(&stack_b, &stack_a);
+	ft_lstprint_stack(stack_a, stack_b);
+
 }
 
 int	main(int arc, char **arv)

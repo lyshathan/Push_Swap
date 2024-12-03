@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:09:10 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/03 08:12:07 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/03 14:16:46 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_lstprint_stack(t_list *stack_a, t_list *stack_b)
 			ft_printf("node #%d --> %d		", i, *(int *)stack_a->content);
 			stack_a = stack_a->next;
 			i++;
-
 		}
 		if (stack_b)
 		{

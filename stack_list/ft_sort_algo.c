@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_algo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:16:08 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/04 17:29:22 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/04 21:49:07 by ly-sha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_sort_3_elem(t_stack **stack_a)
 		if (*(second)->data > *(third)->data)
 		{
 			ft_reverse_rotate_a(stack_a);
-			if (*(*stack_a)->data > 
+			if (*(*stack_a)->data >
 				*(*stack_a)->next->data)
 				ft_swap_a(*stack_a);
 		}
@@ -87,7 +87,7 @@ void	ft_sort_5_elem(t_stack **stack_a, t_stack **stack_b)
 // {
 // 	int		*little;
 // 	int		place_in_stack;
-	
+
 // 	if (!ft_is_sorted(*stack_a))
 // 	{
 // 		while (ft_stack_size(*stack_a) > 5)
@@ -118,7 +118,7 @@ void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b)
 		pivot = *ft_stack_last(*stack_a)->data;
 		ft_printf(RED"data pivot = %d\n"RESET, *ft_stack_last(*stack_a)->data);
 		ft_printf(RED"pivot = %d\n"RESET, pivot);
-		while (ft_stack_size(*stack_a) > 5 && *(*stack_a)->data != pivot)
+		while (*(*stack_a)->data != pivot)
 		{
 			if (*(*stack_a)->data < pivot)
 				ft_push_b(stack_a, stack_b);
@@ -127,7 +127,7 @@ void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b)
 		}
 		ft_stack_print(*stack_a, *stack_b);
 	}
-	ft_sort_5_elem(stack_a, stack_b);
+	ft_sort_algo(stack_a, stack_b);
 }
 
 void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b)

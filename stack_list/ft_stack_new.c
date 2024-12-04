@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_sorted.c                                     :+:      :+:    :+:   */
+/*   ft_stack_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 14:38:00 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/04 10:10:12 by lthan            ###   ########.fr       */
+/*   Created: 2024/11/07 17:20:42 by lthan             #+#    #+#             */
+/*   Updated: 2024/12/04 10:38:32 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	ft_is_sorted(t_stack	*stack)
+t_stack	*ft_stack_new(int *data)
 {
-	if (!stack)
-		return (0);
-	while (stack->next)
-	{
-		if (*(int *)stack->data > *(int *)stack->next->data)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
+	t_stack	*new;
+
+	new = malloc(sizeof(t_stack));
+	if (!new)
+		return (NULL);
+	new->next = NULL;
+	new->data = data;
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:40:10 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/03 14:49:38 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/04 14:24:03 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,39 @@
 #define BLUE    "\033[1;34m"
 #define RESET   "\033[0m"
 
-void	ft_lstprint(t_list *stack);
-void	ft_lstprint_stack(t_list *stack_a, t_list *stack_b);
+typedef struct s_stack
+{
+	int			*data;
+	struct s_stack	*next;
+}					t_stack;
+
+void	ft_stack_print(t_stack *stack_a, t_stack *stack_b);
 long	ft_atoi_long(const char *nptr);
-int 	is_valid_input(char *str, t_list **stack_a);
+int 	is_valid_input(char *str, t_stack **stack_a);
 
-void	ft_swap_a(t_list *stack_a);
-void	ft_swap_b(t_list *stack_b);
-void	ft_swap_all(t_list *stack_a, t_list *stack_b);
-void	ft_push_a(t_list **stack_b, t_list **stack_a);
-void	ft_push_b(t_list **stack_a, t_list **stack_b);
-void	ft_rotate_a(t_list **stack_a);
-void	ft_rotate_b(t_list **stack_b);
-void	ft_rotate_all(t_list **stack_a, t_list **stack_b);
-void	ft_reverse_rotate_a(t_list **stack_a);
-void	ft_reverse_rotate_b(t_list **stack_b);
-void	ft_reverse_rotate_all(t_list **stack_a, t_list **stack_b);
+t_stack	*ft_stack_new(int *data);
+t_stack	*ft_stack_last(t_stack *stack);
+void	ft_stack_add_back(t_stack **stack, t_stack *new);
+void	ft_stack_add_front(t_stack **stack, t_stack *new);
+void	ft_stack_delone(t_stack *stack, void (*del)(int *));
+void	ft_stack_clear(t_stack **stack, void (*del)(int *));
+int		ft_stack_size(t_stack *stack);
 
-int		ft_is_sorted(t_list	*stack);
-void	ft_sort_algo(t_list **stack_a, t_list **stack_b);
+
+void	ft_swap_a(t_stack *stack_a);
+void	ft_swap_b(t_stack *stack_b);
+void	ft_swap_all(t_stack *stack_a, t_stack *stack_b);
+void	ft_push_a(t_stack **stack_b, t_stack **stack_a);
+void	ft_push_b(t_stack **stack_a, t_stack **stack_b);
+void	ft_rotate_a(t_stack **stack_a);
+void	ft_rotate_b(t_stack **stack_b);
+void	ft_rotate_all(t_stack **stack_a, t_stack **stack_b);
+void	ft_reverse_rotate_a(t_stack **stack_a);
+void	ft_reverse_rotate_b(t_stack **stack_b);
+void	ft_reverse_rotate_all(t_stack **stack_a, t_stack **stack_b);
+
+int		ft_is_sorted(t_stack	*stack);
+void	ft_stack_find_little(t_stack *stack, int *place_in_stack, int **little);
+void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b);
 
 #endif

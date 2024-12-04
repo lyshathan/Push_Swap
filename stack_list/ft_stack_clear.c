@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_sorted.c                                     :+:      :+:    :+:   */
+/*   ft_stack_clear.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 14:38:00 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/04 10:10:12 by lthan            ###   ########.fr       */
+/*   Created: 2024/11/08 09:38:32 by lthan             #+#    #+#             */
+/*   Updated: 2024/12/04 10:28:35 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	ft_is_sorted(t_stack	*stack)
+void	ft_stack_clear(t_stack **stack, void (*del)(int *))
 {
-	if (!stack)
-		return (0);
-	while (stack->next)
+	t_stack	*temp;
+	t_stack	*next;
+
+	if (!stack || !*stack || !del)
+		return ;
+	temp = *stack;
+	while (temp)
 	{
-		if (*(int *)stack->data > *(int *)stack->next->data)
-			return (0);
-		stack = stack->next;
+		del(temp->data);
+		next = temp->next;
+		free(temp);
+		temp = next;
 	}
-	return (1);
+	*stack = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:23:50 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/04 17:28:18 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/05 10:11:10 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,49 @@ void	set_stack(int arc, char **arv, t_stack **stack_a)
 	else
 		ft_populate_list(arv, 1, stack_a);
 }
+void	ft_sort_temp_stack(t_stack **stack)
+{
+	t_stack	*current;
+	t_stack	*next;
+	int		*tmp;
+
+	current = *stack;
+	while (current->next)
+	{
+		next = current->next;
+		if (*current->data > *next->data)
+		{
+			tmp = current->data;
+			current->data = next->data;
+			next->data = tmp;
+			current = *stack;
+		}
+		else
+			current = current->next;
+	}
+}
+
 
 int	ft_push_swap(int arc, char **arv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	t_stack	*sorted;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	sorted = NULL;
 	set_stack(arc, arv, &stack_a);
 	if (!stack_a)
 		return (0);
+	set_stack(arc, arv, &sorted);
+	if (!sorted)
+		return (0);
 	ft_printf("Initial stacks =======\n");
-	ft_stack_print(stack_a, stack_b);
-	ft_sort_algo(&stack_a, &stack_b);
-	ft_stack_print(stack_a, stack_b);
+	ft_stack_print(stack_a, stack_b, sorted);
+	ft_sort_temp_stack(&sorted);
+	ft_sort_algo(&stack_a, &stack_b, sorted);
+	ft_stack_print(stack_a, stack_b, sorted);
 	return (1);
 }
 

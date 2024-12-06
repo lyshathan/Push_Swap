@@ -6,159 +6,157 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 04:16:09 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/05 16:49:51 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/06 14:20:50 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	*ft_find_pivot(t_stack *sorted)
+int	ft_abs(int nb)
 {
-	int	*pivot;
-	int	i;
-	int	pivot_number;
-	int	size;
-	int	result;
+	if (nb < 0)
+		return (-nb);
+	return (nb);
+}
+
+int	ft_count_until_top(t_stack *stack, int number)
+{
+	int		rot;
+	int		rev;
+	t_stack	*current;
+	t_stack	*tmp;
 	
-	size = ft_stack_size(sorted);
-	if (size < 101)
+	current = stack;
+	while (*current->data != number)
+		current = current->next;
+	tmp = current;
+	rev = 0;
+	while (tmp)
 	{
-		pivot = malloc(4 * sizeof(int));
-		if (!pivot)
-			return (NULL);
-		pivot[4] = 0;
-		i = 0;
-		pivot_number = 1;
-		result = size / 4;
-		if (size % 4 != 0)
-			result++;
-		while (sorted)
-		{
-			// ft_printf("node = %d	size = %d	i = %d	calcul = %d\n", *sorted->data, size, i, result * pivot_number);
-			if (i == result * pivot_number)
-			{
-				pivot[pivot_number - 1] = *sorted->data;
-				pivot_number++;
-			}
-			sorted = sorted->next;
-			i++;
-		}
+		tmp = tmp->next;
+		rev--;
 	}
-	i = 0;
-	while (pivot[i])
+	tmp = current;
+	rot = 0;
+	while (tmp->prev)
 	{
-		ft_printf(RED"i = %d --> pivot = %d\n"RED, i, pivot[i]);
-		i++;
+		tmp = tmp->prev;
+		rot++;
 	}
-	return (pivot);
+	// ft_printf("number = %d		rot = %d		rev = %d\n", number, rot, rev);
+	if (-rot < rev)
+		return (rev);
+	return (rot);
 }
 
-int	ft_find_rotation_iter(t_stack *stack_a, int pivot)
+int	ft_count_set_b(t_stack *stack, int number, int action_a)
 {
-	int rotation;
+	int	rot;
+	int	rev;
+	t_stack	*current;
 
-	rotation = 0;
-	while (stack_a)
+	if (number > *stack->data && number > *ft_stack_last(stack)->data)
 	{
-		if (*stack_a->data <= pivot)
-			break ;
-		stack_a = stack_a->next;
-		rotation++;
-	}
-	if (rotation > ft_stack_size(stack_a))
-		return (-1);
-	ft_printf(GREEN"rotation = %d\n"RESET, rotation);
-	return (rotation);
-}
-
-int	ft_find_rev_rotation_iter(t_stack *stack_a, int pivot)
-{
-	int rev_rotation;
-	int	i;
-	int	size;
-
-	size = ft_stack_size(stack_a);
-	rev_rotation = 0;
-	i = 1;
-	while (stack_a)
-	{
-		if (*stack_a->data <= pivot)
-		{
-			rev_rotation = i;
-			// ft_printf("lower found = %d		at node = %d\n", *stack_a->data, i);
-		}
-		i++;
-		stack_a = stack_a->next;
-	}
-	// ft_printf("size = %d	i = %d		before rev_rotation = %d\n", i, size, rev_rotation);
-	rev_rotation = size - rev_rotation + 1;
-	ft_printf(GREEN"rev_rotation = %d\n"RESET, rev_rotation);
-	return (rev_rotation);
-}
-
-int	ft_find_rotation_side(t_stack *stack_a, int	pivot)
-{
-	int	rotation;
-	int	rev_rotation;
-	
-	rotation = ft_find_rotation_iter(stack_a, pivot);
-	// ft_printf(GREEN"rotation = %d\n"RESET, rotation);
-	if (rotation < 0)
-		return (-1);
-	if (!rotation)
+		// ft_printf("no need to sort B\n");
 		return (0);
-	rev_rotation = ft_find_rev_rotation_iter(stack_a, pivot);
-	// ft_printf(GREEN"rev_rotation = %d\n"RESET, rev_rotation);
-	if (rotation <= rev_rotation)
-		return (1);
-	else
-		return (2);
-}
-
-void	ft_sort_by_group(t_stack **stack_a, t_stack **stack_b, t_stack *sorted, int	*pivot)
-{
-	int i;
-	int	side_rot;
-	
-	i = 0;
-	int piv = 50;
-	ft_printf(RED"pivot = %d\n"RESET, piv);
-	side_rot = ft_find_rotation_side(*stack_a, piv);
-	ft_printf(YELLOW"pivot = %d		rotation side = %d\n"RESET, pivot[i], side_rot);
-	
-	/* while (*stack_a && stack_a && pivot[i])
-	{
-		ft_printf(RED"OK OK\n"RESET);
-		side_rot = ft_find_rotation_side(*stack_a, pivot[i]);
-		ft_printf(RED"pivot = %d		rotation side = %d\n"RESET, pivot[i], side_rot);
-		while (side_rot >= 0)
-		{
-			ft_printf(YELLOW"pivot = %d		rotation side = %d\n"RESET, pivot[i], side_rot);
-			if (side_rot < 0)
-				i++;
-			ft_printf(YELLOW"data = %d		pivot = %d\n"RESET, *(*stack_a)->data, pivot[i]);
-			while (*(*stack_a)->data > pivot[i])
-			{
-				if (side_rot == 1)
-					ft_rotate_a(stack_a);
-				if (side_rot == 2)
-					ft_reverse_rotate_a(stack_a);
-			}
-			ft_push_b(stack_a, stack_b);
-			ft_stack_print(*stack_a, *stack_b, sorted);
-			side_rot = ft_find_rotation_side(*stack_a, pivot[i]);
-			if (side_rot < 0)
-				ft_printf(YELLOW"NUMBER NOT FOUND // pivot = %d	// rotation side = %d\n"RESET, pivot[i], side_rot);
-		}
-		i++;
 	}
-	 */
+	current = stack->next;
+	rot = 1;
+	while (current && number < *current->data)
+	{
+		rot++;
+		current = current->next;
+	}
+	current = ft_stack_last(stack);
+	rev = -1;
+	while (current && number > *current->prev->data)
+	{
+		rev--;
+		current = current->prev;
+	}
+	
+	if (action_a < 0)
+	{
+		if (ft_abs(action_a) > ft_abs(rev))
+			rev = 0;
+		else
+			rev = rev - action_a;
+	}
+	if (action_a > 0)
+	{
+		if (action_a > rot)
+			rot = 0;
+		else
+			rot = rot - action_a;
+	}
+	if (-rev < rot)
+	{
+		// ft_printf("first good value found  = %d		rev = %d\n", *current->data, rev);
+		return (rev);
+	}
+	// ft_printf("first good value found  = %d		rot = %d\n", *current->data, rot);
+	return (rot);
 }
 
-void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b, t_stack *sorted)
+int	ft_find_minimum_action(t_stack *stack_a, t_stack *stack_b, int number)
 {
-	int	*pivot;
+	int	action_a;
+	int	action_b;
+	int	total_action;
 	
-	pivot = ft_find_pivot(sorted);
-	ft_sort_by_group(stack_a, stack_b, sorted, pivot);
+	action_a = ft_count_until_top(stack_a, number);
+	// ft_printf(YELLOW"The shortest way up to stack A = %d\n"RESET, action_a);
+	action_b = ft_count_set_b(stack_b, number, action_a);
+	// ft_printf(YELLOW"The shortest way to set stack B = %d\n"RESET, action_b);
+	total_action = ft_abs(action_a) + ft_abs(action_b) + 1;
+	// ft_printf(RED"The minimum number of action for %d is	%d\n"RESET, number, total_action);
+	return (total_action);
+}
+
+int	ft_find_cheapest(t_stack *stack_a, t_stack *stack_b)
+{
+	int		cheapest;
+	int	 	min_current;
+	int		min_next;
+	t_stack	*current;
+	
+	current = stack_a;
+	cheapest = *current->data;
+	while (current->next)
+	{
+		min_current = ft_find_minimum_action(stack_a, stack_b, cheapest);
+		min_next = ft_find_minimum_action(stack_a, stack_b, *current->next->data);
+		ft_printf(YELLOW"min for %d --> %d	VS	min for %d --> %d\n"RESET, cheapest, min_current, *current->next->data, min_next);
+
+		if (min_current > min_next)
+		{
+			cheapest = *current->next->data;
+			ft_printf(GREEN"New chepeast found --> %d		\n"RESET, cheapest);
+		}
+		current = current->next;
+	}
+	ft_printf(GREEN"The cheapest is = %d\n"RESET, cheapest);
+	return (cheapest);
+}
+
+void	ft_push_cheapest(t_stack **stack_a, t_stack **stack_b, int cheapest)
+{
+	
+}
+
+void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b)
+{
+	int cheapeast;
+	
+	//Find the minimum operations for a given number
+	ft_push_b(stack_a, stack_b);
+	ft_push_b(stack_a, stack_b);
+	ft_push_b(stack_a, stack_b);
+	ft_push_b(stack_a, stack_b);
+	// ft_push_b(stack_a, stack_b);
+	ft_printf("To be sort =======\n");
+	ft_stack_print(*stack_a, *stack_b);
+	
+	// ft_find_minimum_action(*stack_a, *stack_b, 238);
+	cheapeast = ft_find_cheapest(*stack_a, *stack_b);
 }

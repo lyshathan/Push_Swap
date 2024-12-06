@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:50:39 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/04 10:31:11 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/06 10:39:18 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_reverse_rotate(t_stack **stack)
 {
 	t_stack	*last;
 	t_stack	*before_last;
-	// t_stack	*tmp;
 
 	if (*stack && (*stack)->next)
 	{
@@ -26,7 +25,9 @@ void	ft_reverse_rotate(t_stack **stack)
 		last = ft_stack_last(*stack);
 		before_last->next = NULL;
 		last->next = *stack;
+		(*stack)->prev = last;
 		*stack = last;
+		(*stack)->prev = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:40:10 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/05 14:37:44 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/06 11:33:51 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@
 
 typedef struct s_stack
 {
-	int			*data;
+	int				*data;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }					t_stack;
 
-void	ft_stack_print(t_stack *stack_a, t_stack *stack_b, t_stack *sorted);
+void	ft_stack_print(t_stack *stack_a, t_stack *stack_b);
 long	ft_atoi_long(const char *nptr);
 int 	is_valid_input(char *str, t_stack **stack_a);
 
@@ -58,7 +59,7 @@ void	ft_reverse_rotate_all(t_stack **stack_a, t_stack **stack_b);
 
 int		ft_is_sorted(t_stack *stack);
 void	ft_stack_find_little(t_stack *stack, int *place_in_stack, int **little);
-void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b, t_stack *sorted);
-void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b, t_stack *sorted);
+void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b);
+void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b);
 
 #endif

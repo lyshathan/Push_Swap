@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:22:43 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/04 10:30:35 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/06 10:35:34 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_rotate(t_stack **stack)
 		last = ft_stack_last(*stack);
 		tmp = (*stack)->next;
 		last->next = *stack;
+		(*stack)->prev = last;
 		(*stack)->next = NULL;
+		tmp->prev = NULL;
 		*stack = tmp;
 	}
 }

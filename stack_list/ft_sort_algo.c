@@ -6,7 +6,7 @@
 /*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:16:08 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/05 10:20:36 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/06 13:07:05 by lthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_sort_5_elem(t_stack **stack_a, t_stack **stack_b)
 
 
 
-void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b, t_stack *sorted)
+void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b)
 {
 	int	size_a;
 	int	size_b;
@@ -101,6 +101,6 @@ void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b, t_stack *sorted)
 	if (size_a == 5)
 		ft_sort_5_elem(stack_a, stack_b);
 	if (size_a > 5)
-		ft_sort_more_elem(stack_a, stack_b, sorted);
+		ft_sort_more_elem(stack_a, stack_b);
 
 }

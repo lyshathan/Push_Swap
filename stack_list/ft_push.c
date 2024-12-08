@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:07:32 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/06 10:33:15 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/08 19:01:50 by ly-sha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_push_a(t_stack **stack_b, t_stack **stack_a)
 	{
 		tmp = (*stack_b)->next;
 		ft_stack_add_front(stack_a, *stack_b);
-		tmp->prev = NULL;
+		if (tmp)
+			tmp->prev = NULL;
 		*stack_b = tmp;
 	}
 	ft_printf("pa\n");

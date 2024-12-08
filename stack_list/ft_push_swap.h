@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:40:10 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/06 11:33:51 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/08 15:45:32 by ly-sha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_reverse_rotate_all(t_stack **stack_a, t_stack **stack_b);
 int		ft_is_sorted(t_stack *stack);
 void	ft_stack_find_little(t_stack *stack, int *place_in_stack, int **little);
 void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b);
+void	ft_sort_3_elem(t_stack **stack_a);
 void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b);
 
 #endif

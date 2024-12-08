@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:23:50 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/06 11:33:46 by lthan            ###   ########.fr       */
+/*   Updated: 2024/12/08 19:03:40 by ly-sha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ int	ft_push_swap(int arc, char **arv)
 	set_stack(arc, arv, &sorted);
 	if (!sorted)
 		return (0);
-	ft_printf("Initial stacks =======\n");
-	ft_stack_print(stack_a, stack_b);
+	// ft_printf("Initial stacks =======\n");
+	// ft_stack_print(stack_a, stack_b);
 	// ft_sort_temp_stack(&sorted);
 	ft_sort_algo(&stack_a, &stack_b);
 	// ft_printf(GREEN"FINAL STACKS =======\n"RESET);
-	// ft_stack_print(stack_a, stack_b, sorted);
+	// ft_stack_print(stack_a, stack_b);
 	return (1);
 }
 

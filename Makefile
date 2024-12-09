@@ -6,7 +6,7 @@
 #    By: lthan <lthan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 14:55:30 by lthan             #+#    #+#              #
-#    Updated: 2024/12/09 15:10:36 by lthan            ###   ########.fr        #
+#    Updated: 2024/12/09 15:26:58 by lthan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ LIBFT_FILES = $(addprefix $(LIBFT_PATH)/, $(LIBFT_FUNCTIONS)) $(LIBFT_PATH)/libf
 
 all:$(NAME)
 
-$(NAME): $(LIBFT_FILES)
+$(NAME): $(LIBFT_FILES) $(SRC) ft_push_swap.h Makefile
 	make -C $(LIBFT_PATH)
 	$(CC) $(SRC) $(CFLAGS) $(LIBFT) -o $(NAME)
 

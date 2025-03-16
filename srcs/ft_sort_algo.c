@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_algo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:50:04 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/09 14:43:44 by lthan            ###   ########.fr       */
+/*   Updated: 2025/03/16 19:23:47 by ly-sha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ void	ft_sort_more_elem(t_stack **stack_a, t_stack **stack_b)
 void	ft_sort_algo(t_stack **stack_a, t_stack **stack_b)
 {
 	int	size_a;
-	int	size_b;
 
 	size_a = ft_stack_size(*stack_a);
-	size_b = ft_stack_size(*stack_b);
 	if (!ft_is_sorted(*stack_a))
 	{
 		if (size_a == 2)

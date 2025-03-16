@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lthan <lthan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 08:40:10 by lthan             #+#    #+#             */
-/*   Updated: 2024/12/09 14:20:19 by lthan            ###   ########.fr       */
+/*   Updated: 2025/03/16 19:21:24 by ly-sha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include "./libft/libft.h"
-# include "./libft/ft_printf.h"
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
 
 typedef struct s_stack
 {

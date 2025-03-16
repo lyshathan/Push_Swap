@@ -3,30 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lthan <lthan@student.42.fr>                +#+  +:+       +#+         #
+#    By: ly-sha <ly-sha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 14:55:30 by lthan             #+#    #+#              #
-#    Updated: 2024/12/09 15:26:58 by lthan            ###   ########.fr        #
+#    Updated: 2025/03/16 19:56:19 by ly-sha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 NAME = push_swap
 RM = rm -rf
 
-SRC = ft_push_swap.c \
-ft_check_input.c \
-ft_find_min_action_1.c \
-ft_find_min_action_2.c \
-ft_push_swap_utils.c \
-ft_push.c \
-ft_reverse_rotate.c \
-ft_rotate.c \
-ft_sort_algo.c \
-ft_sort_more_elem.c \
-ft_stack_management.c \
-ft_swap.c
+HEADERS = includes/ft_push_swap.h
+
+SRCS_DIR = srcs
+SRC = $(SRCS_DIR)/ft_push_swap.c \
+	$(SRCS_DIR)/ft_check_input.c \
+	$(SRCS_DIR)/ft_find_min_action_1.c \
+	$(SRCS_DIR)/ft_find_min_action_2.c \
+	$(SRCS_DIR)/ft_push_swap_utils.c \
+	$(SRCS_DIR)/ft_push.c \
+	$(SRCS_DIR)/ft_reverse_rotate.c \
+	$(SRCS_DIR)/ft_rotate.c \
+	$(SRCS_DIR)/ft_sort_algo.c \
+	$(SRCS_DIR)/ft_sort_more_elem.c \
+	$(SRCS_DIR)/ft_stack_management.c \
+	$(SRCS_DIR)/ft_swap.c
 
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
@@ -67,14 +70,24 @@ ft_putnbr_fd.c
 
 LIBFT_FILES = $(addprefix $(LIBFT_PATH)/, $(LIBFT_FUNCTIONS)) $(LIBFT_PATH)/libft.h $(LIBFT_PATH)/Makefile
 
+OBJS_DIR = objects
+OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+
 all:$(NAME)
 
-$(NAME): $(LIBFT_FILES) $(SRC) ft_push_swap.h Makefile
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c Makefile $(HEADERS)
+	$(CC) $(CFLAGS) -I$(LIBFT_PATH) -c $< -o $@
+
+$(NAME): $(OBJS_DIR) $(OBJS) $(LIBFT_FILES)
 	make -C $(LIBFT_PATH)
 	$(CC) $(SRC) $(CFLAGS) $(LIBFT) -o $(NAME)
 
 clean:
 	make -C $(LIBFT_PATH) clean
+	$(RM) $(OBJS_DIR)
 
 fclean: clean
 	make -C $(LIBFT_PATH) fclean
